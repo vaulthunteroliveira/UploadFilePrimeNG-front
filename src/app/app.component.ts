@@ -18,13 +18,21 @@ export class AppComponent {
   dealWithFiles(event) {
     
       for(let file of event.files){
-        console.log(file.name)
+        this.uploadedFiles.push(file.name)
       }
-    
-    // for(let i = 0; i < fileList.lenght; i++){
-    //   this.uploadedFiles.push(fileList[i])
-    // }
+  }
 
+  save(){
+    if(this.uploadedFiles.length > 0){
+      
+      const formData = new FormData();
 
+      this.uploadedFiles.forEach( file => formData.append('file', file, file.name))
+
+      console.log(formData);
+
+      //const 
+
+    }
   }
 }
