@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -8,31 +8,27 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AppComponent {
 
-
-  
   uploadedFiles: any[] = [];
 
-  constructor() {}
+  constructor() { }
 
 
   dealWithFiles(event) {
-    
-      for(let file of event.files){
-        this.uploadedFiles.push(file.name)
-      }
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
   }
 
-  save(){
-    if(this.uploadedFiles.length > 0){
-      
-      const formData = new FormData();
+  save() {
 
-      this.uploadedFiles.forEach( file => formData.append('file', file, file.name))
+    console.log(this.uploadedFiles)
 
-      console.log(formData);
+      const formData: FormData = new FormData();
 
+      this.uploadedFiles.forEach(file => formData.append('file', file, file.name))
+
+      formData.forEach(teste => console.log(`formdata => $teste`))
       //const 
 
-    }
   }
 }
