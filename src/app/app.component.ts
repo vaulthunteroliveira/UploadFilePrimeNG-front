@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpRequest, HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -10,7 +10,8 @@ export class AppComponent {
 
   uploadedFiles: any[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient){}
+
 
 
   dealWithFiles(event) {
@@ -25,10 +26,13 @@ export class AppComponent {
 
       const formData: FormData = new FormData();
 
-      this.uploadedFiles.forEach(file => formData.append('file', file, file.name))
+      this.uploadedFiles.forEach(file => formData.append('file', file, file.name));
 
-      formData.forEach(teste => console.log(`formdata => $teste`))
-      //const 
+      // const request = new HttpRequest('POST', '/arquivos', formData);
+
+      this.http.post('/api/arquivos', formData).subscribe(res =>{
+        console.log('envio feito com sucesso!')
+      })
 
   }
 }
